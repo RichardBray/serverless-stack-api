@@ -1,0 +1,25 @@
+service: notes-api
+
+# Create an optimized package for our functions
+package:
+  individually: true
+
+plugins:
+  - serverless-bundle # Package our functions with Webpack Adds ES6 and TypeScript support
+  - serverless-offline # Helpful for local development
+  - serverless-dotenv-plugin # Load .env as environment variables
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: personal
+  stage: prod
+  region: eu-west-2
+
+functions:
+  hello:
+    handler: handler.hello
+    events:
+      - http:
+          path: hello
+          method: get
